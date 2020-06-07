@@ -1,5 +1,7 @@
 package newapi.newapi.controllers;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import newapi.newapi.models.Test;
 import newapi.newapi.requests.RawDataRequest;
 import newapi.newapi.response.Response;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RequestMapping("/tests")
+@Api(tags = {"1. Tests"})
 @RestController
 public class TestController extends BaseController {
     final private TestService testService;
@@ -17,6 +20,7 @@ public class TestController extends BaseController {
         this.testService = testService;
     }
 
+    @ApiOperation(value = "키워드 조회", notes = "입력한 키워드의 데이터를 조회")
     @GetMapping("")
     public Response<List<Test>> search(@RequestParam String query) {
         System.out.println("12313");

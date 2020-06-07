@@ -1,5 +1,5 @@
 server:
-  port: 9999
+  port: 8080
 spring:
   main:
     allow-bean-definition-overriding: true
@@ -12,3 +12,5 @@ spring:
       hibernate:
         format_sql: true
     show-sql: true
+  resources:
+    static-locations: classpath:/webapp/
