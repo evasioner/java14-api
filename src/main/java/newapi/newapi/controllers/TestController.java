@@ -23,7 +23,6 @@ public class TestController extends BaseController {
     @ApiOperation(value = "키워드 조회", notes = "입력한 키워드의 데이터를 조회")
     @GetMapping("")
     public Response<List<Test>> search(@RequestParam String query) {
-        System.out.println("12313");
         return response(testService.search(query));
     }
 
