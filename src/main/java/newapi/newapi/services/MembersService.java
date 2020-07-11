@@ -1,5 +1,6 @@
 package newapi.newapi.services;
 
+import lombok.RequiredArgsConstructor;
 import newapi.newapi.models.Members;
 import newapi.newapi.models.types.RoleType;
 import newapi.newapi.repositories.MembersRepository;
@@ -19,13 +20,16 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class MembersService implements UserDetailsService {
-    private MembersRepository membersRepository;
+    final private MembersRepository membersRepository;
 
     @Transactional
     public Members signUp(SignUpRequest request) {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         request.setPassword(passwordEncoder.encode(request.getPassword()));
+
+        System.out.println(request);
         return membersRepository.save(request.toEntity());
     }
 

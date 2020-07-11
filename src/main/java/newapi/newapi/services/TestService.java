@@ -1,5 +1,6 @@
 package newapi.newapi.services;
 
+import lombok.RequiredArgsConstructor;
 import newapi.newapi.models.Test;
 import newapi.newapi.models.types.LangType;
 import newapi.newapi.repositories.TestRepository;
@@ -12,17 +13,13 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class TestService {
     private final TestRepository testRepository;
     private final DataUtil dataUtil;
 
-    public TestService(TestRepository testRepository, DataUtil dataUtil) {
-        this.testRepository = testRepository;
-        this.dataUtil = dataUtil;
-    }
-
     public List<Test> search(String query) {
-        return this.testRepository.search(dataUtil.keyword(query));
+        return testRepository.search(dataUtil.keyword(query));
     }
 
     public Test register(RawDataRequest request) {
@@ -31,14 +28,13 @@ public class TestService {
         Map<String, String> rawData = request.getRawData().entrySet().stream().collect(Collectors.toMap(e -> e.getKey().name(), e -> e.getValue()));
         test.setRawData(rawData);
         request.getRawData().forEach((key, value) -> {
-            if (key.equals(LangType.ko)) {
+            if (key.equals(LangType.ko))
                 keyword.append(dataUtil.chosung(value)).append(" ").append(dataUtil.keyword(value));
-            } else {
+            else
                 keyword.append(" ").append(dataUtil.keyword(value));
-            }
         });
         test.setKeyword(keyword.toString());
-        return this.testRepository.saveAndFlush(test);
+        return testRepository.saveAndFlush(test);
 
     }
 }
