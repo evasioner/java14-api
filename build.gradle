@@ -23,6 +23,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-data-redis'
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    compile "org.springframework.boot:spring-boot-starter-security"
     compile 'org.apache.commons:commons-lang3:3.4'
     compile group: 'it.ozimov', name: 'embedded-redis', version: '0.7.2'
     // lettuce
